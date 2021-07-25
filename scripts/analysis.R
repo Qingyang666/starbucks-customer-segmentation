@@ -3,12 +3,19 @@ library(ggplot2)
 library(NbClust)
 # import final data set
 starbucks_customer <- read_csv('data/profile_offer_transaction.csv')[,-1]
+starbucks_customer <- starbucks_customer %>%
+  mutate(gender_male = as.factor(gender_male),
+         gender_female = as.factor(gender_female),
+         gender_other = as.factor(gender_other))
 # examining data 
 glimpse(starbucks_customer)
 summary(starbucks_customer)
 # split dataset into customer_id_df and predictors_df
-customer_id_df <- starbucks_customer %>% select(customer_id)
-predictors_df <- starbucks_customer %>% select(-customer_id)
+## remove categorical columns since they cannot be scaled.
+customer_id_df <- starbucks_customer %>% 
+  select(customer_id)
+predictors_df <- starbucks_customer %>% 
+  select(-customer_id, -gender_male, -gender_female, -gender_other)
 
 #############################PRINCIPAL COMPONENT ANALYSIS#######################
 
@@ -28,7 +35,7 @@ summary(predictors_scale_pca)
 
 # create a tibble that includes principal component id, variance explained, and cumulative proportion
 importance_of_components <- tibble(
-  principal_component = c(1:27),
+  principal_component = c(1:24),
   variance_explained = round(predictors_scale_pca$sdev^2 / sum(predictors_scale_pca$sdev^2),4),
   cumulative_proportion = cumsum(round(predictors_scale_pca$sdev^2 / sum(predictors_scale_pca$sdev^2),4)))
 
@@ -40,7 +47,7 @@ ggplot(data = importance_of_components,
            group = 1)) +
   geom_point(size = 0.8, color = 'steelblue')+
   geom_line(color = 'steelblue')+
-  scale_x_continuous(name = 'principal component id', breaks = c(1:27), limits = c(1,27))+
+  scale_x_continuous(name = 'principal component id', breaks = c(1:24), limits = c(1,24))+
   scale_y_continuous(name = 'proportion of variance explained', labels = scales::percent)+
   labs(title = 'Scree Plot',
        subtitle = 'Variance Explained By Each Principal Component')+
@@ -53,14 +60,14 @@ ggplot(data = importance_of_components,
            group = 1)) +
   geom_point(size = 0.8, color = 'steelblue')+
   geom_line(color = 'steelblue')+
-  scale_x_continuous(name = 'principal component id', breaks = c(1:27), limits = c(1,27))+
+  scale_x_continuous(name = 'principal component id', breaks = c(1:24), limits = c(1,24))+
   scale_y_continuous(name = 'cumulative proportion of variance explained', labels = scales::percent)+
   labs(title = 'Scree Plot',
        subtitle = 'Cumulative Proportion of Variance Explained')+
   theme(text = element_text(family = "serif", size = 10))
 
-# I want to choose 10 principal components, which explains 90% of the variance.
-model_df <- as_tibble(predictors_scale_pca$x[,1:13])
+# I want to choose 12 principal components, which explains 91% of the variance.
+model_df <- as_tibble(predictors_scale_pca$x[,1:12])
 
 ##############################CLUSTER ANALYSIS (PART1)##########################
 
@@ -108,16 +115,21 @@ ggplot(data = data.frame(num_clusters = as.numeric(names(ward.silhouette$All.ind
            group = 1)) +
   geom_point(size = 0.8, color = 'steelblue')+
   geom_line(color = 'steelblue') +
-  geom_hline(yintercept = 0.0993,linetype="dashed", color = "grey") +
+  geom_hline(yintercept = 0.0779,linetype="dashed", color = "grey") +
   geom_vline(xintercept = 4, linetype="dashed", color = "grey") +
   scale_x_continuous(name = 'number of clusters', breaks = c(2:14))+
   scale_y_continuous(name = 'average silhouette width')+
   labs(title = 'Optimal Number of Clusters',
        subtitle = 'silhouette method')+
   theme(text = element_text(family = "serif", size = 10))
-# I would like to choosing global maximum value as my optimal number of clusters, which is 4 clusters.
+# I would like to choosing local maximum value as my optimal number of clusters, which is 4 clusters.
 
 # add back clusters to our original data set
+cluster_4 <- cutree(clust.ward, k = 4)
 starbucks_customer_cluster <-  customer_id_df %>%
-  mutate(cluster = as.factor(ward.silhouette$Best.partition)) %>%
+  mutate(cluster = as.factor(cluster_4)) %>%
   left_join(starbucks_customer, by = 'customer_id')
+
+write.csv(starbucks_customer_cluster, 'data/starbucks_customer_cluster.csv')
+
+
