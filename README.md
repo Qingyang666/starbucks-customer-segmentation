@@ -1,1 +1,1 @@
-# starbucks_customer_segmentation
+# starbucks customer segmentation
