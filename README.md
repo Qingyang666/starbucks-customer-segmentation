@@ -58,3 +58,17 @@
     - Therefore, we need to standardize each variable before performing principal component analysis.
 ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/scree_plot1.png)
 ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/scree_plot2.png)
+- Cluster Analysis Part 1
+  - Hierachical cluster analysis using euclidean distance
+    - single linkage
+    - complete linkage
+    - average linkage
+    - centroid linkage
+    - ward linkage
+- Dendrogram for each linkage method
+
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/single_linkage.png)
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/complete_linkage.png)
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/average_linkage.png)
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/central_linkage.png)
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_linkage.png)
