@@ -56,3 +56,5 @@
   - check standard deviation of each predictor variables: 
     - Predictor variables have very different standard deviations. 
     - Therefore, we need to standardize each variable before performing principal component analysis.
+![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/scree_plot1.png)
+![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/scree_plot2.png)
