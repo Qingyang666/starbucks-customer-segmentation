@@ -65,10 +65,15 @@
     - average linkage
     - centroid linkage
     - ward linkage
-- Dendrogram for each linkage method
+  - Dendrogram for each linkage method
 
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/single_linkage.png)
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/complete_linkage.png)
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/average_linkage.png)
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/central_linkage.png)
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_linkage.png)
+  
+  - average silhouette score for different number of clusters
+  
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_silhouette.png)
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_pc.png)
