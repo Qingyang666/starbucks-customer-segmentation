@@ -77,3 +77,5 @@
   
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_silhouette.png)
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_pc.png)
+  
+- Cluster Analysis Part 2
