@@ -79,3 +79,11 @@
   ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/ward_pc.png)
   
 - Cluster Analysis Part 2
+  - Elbow Method
+  
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/kmeans_elbow.png)
+  
+  - average silhouette score
+  
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/km_silhouette.png)
+  ![alt text](https://github.com/Qingyang666/starbucks-customer-segmentation/blob/main/figures/kmeans_pc.png)
